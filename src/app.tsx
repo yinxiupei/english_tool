@@ -8,7 +8,8 @@ import './app.less'
 // if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {
 //   require('nerv-devtools')
 // }
-
+// const themeColor = '#C20C0C'
+// const mainColor = '#a40011'
 class App extends Component {
 
   /**
@@ -20,13 +21,35 @@ class App extends Component {
    */
   config: Config = {
     pages: [
-      'pages/index/index'
+      'pages/index/index',
+      'pages/date/index',
+      'pages/self/index'
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
+    },
+    tabBar: {
+      color: '#242424',
+      selectedColor: '#C20C0C',
+      list: [{
+        pagePath: 'pages/index/index',
+        text: '翻译',
+        iconPath: './assets/images/icons/home_off.png',
+        selectedIconPath: './assets/images/icons/home_on.png'
+      }, {
+        pagePath: 'pages/date/index',
+        text: '每日一句',
+        iconPath: './assets/images/icons/date_off.png',
+        selectedIconPath: './assets/images/icons/date_on.png'
+      }, {
+        pagePath: 'pages/self/index',
+        text: '我的',
+        iconPath: './assets/images/icons/self_off.png',
+        selectedIconPath: './assets/images/icons/self_on.png'
+      }]
     }
   }
 
