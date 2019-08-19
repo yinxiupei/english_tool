@@ -1,5 +1,5 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View, Text, Input, Button, Textarea } from '@tarojs/components'
 import './index.less'
 
 export default class Index extends Component {
@@ -15,6 +15,15 @@ export default class Index extends Component {
     navigationBarTitleText: '首页'
   }
 
+  constructor (props) {
+    super(props)
+    this.state = {
+      translate: {
+        text: ''
+      }
+    }
+  }
+
   componentWillMount () { }
 
   componentDidMount () { }
@@ -25,10 +34,32 @@ export default class Index extends Component {
 
   componentDidHide () { }
 
+  changeTab = e => {
+    console.log(e)
+  }
+
   render () {
     return (
       <View className='main-container'>
-        <Text>Hello world!</Text>
+        <View className='tabbar'>
+          <View onClick={this.changeTab} className='bar-item active'>查词</View>
+          <View onClick={this.changeTab} className='bar-item'>翻译</View>
+        </View>
+        <View className='content'>
+          <View className='search'>
+            <View className=''>
+              <Input type='text' placeholder='请输入需要查询的单词' placeholderStyle='color: #666'/>
+              <Button>查询</Button>
+            </View>
+          </View>
+          <View className='translate'>
+            <Textarea value={this.translate.text} autoHeight placeholder='' />
+          </View>
+        </View>
+        <View className='footer'>
+          <View className='desc'>每日一句</View>
+          <View className='sentence'>this is a good day</View>
+        </View>
       </View>
     )
   }
