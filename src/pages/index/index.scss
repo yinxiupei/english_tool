@@ -1,0 +1,45 @@
+@import "~taro-ui/dist/style/components/tabs.scss";
+@import "~taro-ui/dist/style/components/button.scss";
+$theme-color: #C20C0C;
+.main-container {
+  padding: 15px;
+}
+.content {
+  padding: 40rpx 0rpx;
+  .translate {
+    display: flex;
+    input {
+      flex-grow: 1;
+      border: 1px solid rgba(194, 12, 12, 0.3);
+      border-radius: 8rpx;
+      margin-right: 24rpx;
+      height: 60rpx;
+      font-size: 28rpx;
+      line-height: 58rpx;
+      padding: 4rpx 16rpx;
+      box-sizing: border-box;
+    }
+    textarea {
+      height: 300px;
+      width: 100%;
+    }
+  }
+}
+.content {
+  min-height: 700px;
+}
+.result {
+  padding: 20px;
+  color: #666;
+  font-size: 28px;
+}
+.footer {
+  font-size: 24px;
+  text-align: center;
+  .desc {
+    color: #999;
+  }
+  .sentence {
+    color: #666;
+  }
+}
