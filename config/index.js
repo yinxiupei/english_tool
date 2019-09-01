@@ -1,6 +1,10 @@
 const config = {
   projectName: 'englishTool',
+<<<<<<< HEAD
   date: '2019-9-1',
+=======
+  date: '2019-8-17',
+>>>>>>> 438666a0aca72e3480f6eccb2fbeb3078e38371e
   designWidth: 750,
   deviceRatio: {
     '640': 2.34 / 2,
