@@ -91,7 +91,7 @@ export default class Index extends Component<{}, PageState> {
       return
     }
     Taro.request({
-      url: `http://dict-co.iciba.com/api/dictionary.php?w=${word.text}&key=1F3E23AD0633149F2383ABA2BAFE4548`,
+      url: `http://dict-co.iciba.com/api/dictionary.php?w=${word.text}&key=1F3E23AD0633149F2383ABA2BAFE4548type=json`,
       method: 'GET'
     }).then(res => {
       console.log(res)
@@ -99,6 +99,23 @@ export default class Index extends Component<{}, PageState> {
   }
 
   translateSentence = () => {
+    const { sentense } = this.state
+    Taro.request({
+      url: 'http://fy.iciba.com/ajax.php?a=fy',
+      data: {
+        f: 'auto',
+        t: 'auto',
+        w: sentense.text
+      },
+      header: {
+        'Accept': 'application/json, text/javascript, */*; q=0.01',
+        'Accept-Language': 'zh-CN,zh;q=0.9',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      },
+      method: 'post'
+    }).then(response => [
+      console.log(response)
+    ])
   }
 
   render () { 
