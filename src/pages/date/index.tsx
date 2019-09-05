@@ -30,7 +30,6 @@ export default class Index extends Component<{}, pageState > {
       },
       method: 'GET'
     }).then(res => {
-      console.log(res)
       if (res.statusCode === 200) {
         this.setState({
           dailyData: res.data
