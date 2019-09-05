@@ -1,6 +1,6 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text, Input, Textarea } from '@tarojs/components'
-import { AtTabs, AtTabsPane, AtButton } from 'taro-ui'
+import { View, Input, Textarea } from '@tarojs/components'
+import { AtTabs, AtTabsPane, AtButton, AtIcon } from 'taro-ui'
 
 import './index.scss'
 
@@ -40,7 +40,7 @@ export default class Index extends Component<{}, PageState> {
     this.state = {
       active: 0,
       sentense: {
-        text: 'hello',
+        text: '',
         result: ''
       },
       word: {
@@ -82,7 +82,6 @@ export default class Index extends Component<{}, PageState> {
 
   translateWord = () => {
     const { word } = this.state
-    console.log(word)
     if (!word) {
       Taro.showToast({
         title: '请输入需要查询的内容',
@@ -91,10 +90,13 @@ export default class Index extends Component<{}, PageState> {
       return
     }
     Taro.request({
-      url: `http://dict-co.iciba.com/api/dictionary.php?w=${word.text}&key=1F3E23AD0633149F2383ABA2BAFE4548type=json`,
+      url: `http://dict-co.iciba.com/api/dictionary.php?w=${word.text}&key=1F3E23AD0633149F2383ABA2BAFE4548&type=json`,
       method: 'GET'
     }).then(res => {
       console.log(res)
+      if (res.statusCode === 200) {
+        console.log(res)
+      }
     })
   }
 
@@ -112,7 +114,7 @@ export default class Index extends Component<{}, PageState> {
         'Accept-Language': 'zh-CN,zh;q=0.9',
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       },
-      method: 'post'
+      method: 'POST'
     }).then(response => [
       console.log(response)
     ])
@@ -128,26 +130,27 @@ export default class Index extends Component<{}, PageState> {
             <AtTabsPane current={active} index={0} >
               <View className='content'>
                 <View className='translate'>
+                  <AtIcon className='icon' value='close-circle' size='18' color='#bbb'></AtIcon>
                   <Input type='text' value={word.text} onInput={this.onInput} placeholder='请输入需要查询的单词' placeholderStyle='color: #999'/>
-                  <AtButton type='primary' size='small' onClick={this.translateWord}>查询</AtButton>
+                  <AtButton className='btn' type='primary' size='small' onClick={this.translateWord}>查一下</AtButton>
                 </View>
                 <View className='result'></View>
               </View>
             </AtTabsPane>
             <AtTabsPane current={active} index={1}>
               <View className='content'>
-                <View className='translate'>
-                  <Textarea value={sentense.text} autoHeight placeholder='' />
-                  <Text className='btn' onClick={this.translateSentence}>翻译</Text>
+                <View className='translate sentence'>
+                  <Textarea value={sentense.text} placeholder='请输入需要查询的句子' />
+                  <View className='operation'>
+                    <AtButton className='btn' type='primary' size='small' onClick={this.translateSentence}>翻译</AtButton>
+                  </View>
                 </View>
-                <View className='result'></View>
+                { sentense.result && <View className='result'>
+                  <View></View>
+                </View> }
               </View>
             </AtTabsPane>
           </AtTabs>
-        </View>
-        <View className='footer'>
-          <View className='desc'>每日一句</View>
-          <View className='sentence'>this is a good day</View>
         </View>
       </View>
     )
